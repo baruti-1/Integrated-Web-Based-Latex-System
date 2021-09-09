@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    CoICT Template
+{% endblock %}
+{% block content %}
+   <div class="row">
+       <div class="col-7">
+            <div class="col-7" id="editor">
+                <div>{{ code }}</div>
+            </div>
+       </div>   
+    <div class="col-5">
+        <div class="button-container">
+            <button class="btn btn-success" style="margin-left: 105%;" onclick="executecode()">Compile</button>
+            <!-- <button class="btn btn-success">Download</button> -->
+            {% csrf_token %}
+        </div>
+        <div style="margin-top: 2%;">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="{% static pdf %}" height="480px" width="550px" allowfullscreen></iframe>
+              </div>
+        </div>
+    </div>
+   </div>
+  
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'web_app/js/ace.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script>
+        let editor;
+        window.onload = function(){
+            editor = ace.edit("editor");
+            document.getElementById('editor').style.fontSize='18px';
+            editor.setShowPrintMargin(false);
+            editor.setTheme("ace/theme/monokai");
+            editor.session.setMode("ace/mode/latex");
+        }
+
+        function executecode(){
+            let csrf = $("input[name=csrfmiddlewaretoken]").val()
+            $.ajax({
+                url: "",
+                method: "POST",
+                data: { 
+                    code: editor.getSession().getValue(),
+                    csrfmiddlewaretoken: csrf,
+                 },
+                success: function(response){
+                    $(".output").append('<p>' + response.data + '</p>')
+                }
+            })
+        }
+    </script>
+{% endblock %}

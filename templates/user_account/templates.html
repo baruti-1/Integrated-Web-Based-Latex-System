@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Templates
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <h4 style="text-align: center;">All Templates:</h4>
+        {% for temp in temp %}
+        <div class="col">
+            <a href="{% url 'template' temp.id %}" style="text-decoration: none; color: black;">
+                <p>{{ temp.template_name }}</p>
+                <img src="{% static 'images/img1.jpeg' %}" 
+                alt="Coict template" style="width: 35%; height: 65%;">
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row" style="margin-top: 200px; margin-left: 450px;">
+        Copyright &copy 2021
+    </div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Create Account
+{% endblock %}
+
+{% block content %} 
+
+<div class="container py-5">
+	<div class="row" style="text-align: center;"> 
+		<h3>Please fill the form bellow to create your account</h3>
+	</div>
+	
+	<div class="row" style="margin-left: 120px;">
+		<div class="col-8" style="margin-left: 100px;"> 
+			<form method="POST" novalidate>
+				{% csrf_token %}
+				{{ form }}                    
+				<button class="btn btn-primary" type="submit">Create account</button>
+			</form>
+			<p class="text-center">If you already have an account, <a href="{% url 'login' %}">login</a> instead.</p>
+		</div>
+	</div>
+</div>
+
+<div class="row" style="margin-left: 450px;">
+	Copyright &copy 2021
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Report
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col">
+          <span>{{ ide }}</span>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Template Name</th>
+                    <th scope="col">Download Report</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    {% if tmp_len == 10 %}
+                      <td><a href="{% url 'report' %}">{{ template }}</a></td>
+                      <td><a href="{% url 'report_download' %}"><i class="fa fa-download"></i></a></td>
+                    {% else %}
+                      <td>{{ template }}</td>
+                    {% endif %}
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 390px; margin-left: 450px;">
+        Copyright &copy 2021
+    </div>
+{% endblock %}

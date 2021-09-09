@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <h6 style="text-align: center;">Welcome: {{ request.user.first_name }} {{request.user.last_name }}</h6>
+        <div class="col-6">
+            <h2>Profile</h2>
+            <p>Registration Number: {{ request.user.username }} </p>
+            <p>Email: {{ request.user.email }}</p>
+            <p>Date Joined: {{ request.user.date_joined }}</p>
+            <p>Last login: {{ request.user.last_login }}</p>
+        </div>
+
+        <div class="col-6">
+            <h2>Edit your profile</h2>
+            <form method="POST">
+                {% csrf_token %}
+                 {{ profile_form }}
+                 <button class="btn btn-success">Update</button>
+            </form>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 130px; margin-left: 450px;">
+        Copyright &copy 2021
+    </div>
+{% endblock %}
+
